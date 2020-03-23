@@ -1,0 +1,9 @@
+kivazv+95b5dtvqbjzh8@sharklasers.com ----ayanghosal0
+key:d7f49b9bbcd84719bdc7c0a5cc5b1a03
+
+
+TOP-HEADLINES--------------http://newsapi.org/v2/top-headlines?country=us&apiKey=d7f49b9bbcd84719bdc7c0a5cc5b1a03
+
+https://newsapi.org/
+
+SOURCES		http://newsapi.org/v2/sources?apiKey=d7f49b9bbcd84719bdc7c0a5cc5b1a03

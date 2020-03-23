@@ -1,0 +1,144 @@
+                                                                <%- include("partials/cdns.ejs") %>	
+<title>24news7</title>
+                                                                <%- include("partials/nav.ejs") %>
+<div class="container">
+    <!-- SLIDE SHOW -->
+    <div class="jumbotron jumbotron-fluid rounded">
+        <div class="container text-center">
+            <h1 class="font-yatra font-weight-bold">Top-headlines from India</h1>
+            <div class="m-auto" >
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <% var i=0 %>
+                        <% if(articles) articles.forEach(function(article){ %>
+                                <% if(i==0){ %>
+                                    <div class="carousel-item active">
+                                        <div class="card m-auto" style="width: 70%;">
+                                            <img <img src="<%= article.urlToImage %>" class="card-img-top" alt="NO IMAGE TO DISPLAY" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTX8MzZOVmqSTyMwJ6mDjKhdLdqQbgNrKXEAZxXO69yuT4u5QFN';">
+                                            <div class="card-body">
+                                                <h5 class="card-title font-weight-bold underline"><%= article.title %></h5>
+                                                <p class="card-text"><%= article.description %></p>
+                                                <a class="btn btn-primary btn-sm" href="<%= article.url %>" target="_blank" role="button">Learn more</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% }else{ %>
+                                    <div class="carousel-item">
+                                        <div class="card m-auto" style="width: 70%;">
+                                            <img <img src="<%= article.urlToImage %>" class="card-img-top" alt="NO IMAGE TO DISPLAY" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTX8MzZOVmqSTyMwJ6mDjKhdLdqQbgNrKXEAZxXO69yuT4u5QFN';">
+                                            <div class="card-body">
+                                                <h5 class="card-title font-weight-bold underline"><%= article.title %></h5>
+                                                <p class="card-text"><%= article.description %></p>
+                                                <a class="btn btn-primary btn-sm" href="<%= article.url %>" target="_blank" role="button">Learn more</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } %>
+                        <% i++ }) %>
+                    </div>
+                    <!-- LEFT AND RIGHT ARROWS -->
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon border border-dark bg-dark rounded-circle" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon border border-dark bg-dark rounded-circle" aria-hidden="true"></span>
+        
+                    <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form action="/search" method="GET">
+    <!--------------------------------------- SORT OPTIONS--------------------------->
+    <div id="navbar1" class="sort-box mb-0">
+        <p class="d-inline font-weight-bold">Sort By :</p>
+        <a class="dropdown-item d-inline rounded active my-2" href="#keyword">Keyword</a>
+        <a class="dropdown-item d-inline rounded my-2" href="#sources">Source</a>
+        <a class="dropdown-item d-inline rounded my-2" href="#countries">Country</a>
+        <a class="dropdown-item d-inline rounded my-2" href="#categories">Category</a>
+        <button type="submit" class="border-0 bg-success text-light d-inline rounded active  my-2">Submit</button>
+        <!-- Button trigger modal -->
+        <button type="button" class="border-0 m-0 bg-danger text-light d-inline active rounded" data-toggle="modal" data-target="#modal">
+            need help?
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="ModalScrollableTitle">Working Rules-</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>1.You can search by using Keywords</p>
+                        <p>2.You can add multiple SOURCES at a time.(IF YOU USE SOURCES, YOU CANNOT USE COUNTRY AND CATEGORY)</p>
+                        <p>3.You can add COUNTRY</p>
+                        <p>4.You can add CATEGORY</p>
+                        <p>5.Use SUBMIT button</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="sort" class="overflow-auto" data-spy="scroll" data-target="#navbar1" data-offset="0">
+        <div>
+            <p id="keyword" class="font-weight-bold">Search by Keyword :</p>
+            <div class="container text-center sources">
+                <input class="form-control mr-sm-2 w-50" type="search" placeholder="Search" aria-label="Search" name="q">
+            </div>            
+        </div>
+        <!-- FORM 2 for sources -->
+        <div>
+            <hr id="sources">
+            <p class="font-weight-bold">Select Sources (1 or more..) :</p>
+            <div class="container text-center sources">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+                    <% sources.forEach(function(source){ %>
+                        <div class="sort-contents">
+                            <label for="<%= source.name %>" class="col"><%= source.name %> <input type="checkbox" name="sources" value="<%= source.id %>"></label>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>            
+        </div>
+        <div >
+            <hr id="countries">
+            <!-- FORM 3 for COUNTRY / CATAGORY-->
+            <p class="font-weight-bold">Select Country :</p>
+            <div class="container text-center countries">
+                <div class="row row-cols-3 row-cols-sm-6">
+                    <% countries.forEach(function(country){ %>
+                        <div class="sort-contents">
+                            <label for="<%= country %>" class="col"><%= country %> <input type="radio" name="country" value="<%= country %>"></label>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+        <div >
+            <hr id="categories">
+            <p class="font-weight-bold">Select Category :</p>
+            <div class="container text-center">
+                <div class="row row-cols-2 row-cols-md-4">
+                    <% categories.forEach(function(category){ %>
+                        <div class="sort-contents">
+                            <label for="<%= category %>" class="col"><%= category %> <input type="radio" name="category" value="<%= category %>"></label>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+        <hr class="mb-40vh">
+    </div>
+</div>
+</form>
+<%- include("partials/footer.ejs") %>
+<!-- nth of type for sources!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!left -->
