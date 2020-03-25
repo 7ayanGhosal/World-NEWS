@@ -16,7 +16,6 @@ app.get('/', function(req, res){
             var data_sources = JSON.parse(body);
             //we got sources now search for top
             request(searchURL,function(err, response, body){
-                console.log(response.statusCode);
                 if(!err && response.statusCode == 200){
                     var data = JSON.parse(body);
                     if(data.totalResults == 0){
