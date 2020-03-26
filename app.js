@@ -34,12 +34,15 @@ app.get('/', function(req, res){
 
 app.get('/search', function(req, res){
     var searchURL = "http://newsapi.org/v2/top-headlines?apiKey=d7f49b9bbcd84719bdc7c0a5cc5b1a03";
-    if(req.query.q){
+    var q = req.query.q;
+    var sources = req.query.sources;
+    var country  = req.query.country;
+    var category = req.query.category;
+    if(q){
         searchURL += "&q="+ req.query.q;
     }
-    if(req.query.sources){
+    if(sources){
         // SOURCES PROVIDED
-        var sources = req.query.sources;
         searchURL += "&sources=";
         if(typeof sources == "string")
             searchURL += sources +",";
@@ -49,8 +52,6 @@ app.get('/search', function(req, res){
             }) 
     }else{
         // SOURCES NOT PROVIDED
-        var country  = req.query.country;
-        var category = req.query.category;
         if(country){
             searchURL += "&country="+country;
         }
@@ -59,7 +60,7 @@ app.get('/search', function(req, res){
         }
     }
     //handle case if search is empty , redirect to home
-    if(!req.query.q && !req.query.sources && req.query.country && req.query.category){
+    if(!q && !sources && !country && !category){
         res.redirect("/");
     }else{
         // RENDER THE RESULT
@@ -70,7 +71,7 @@ app.get('/search', function(req, res){
                     res.send("OOPS!! No search result found!");
                 }
                 else
-                    res.render("search.ejs",{articles: data.articles})
+                    res.render("search.ejs",{articles:data.articles, country:country, sources:sources, q:q, category:category})
             }
             else {
                 res.redirect("/");

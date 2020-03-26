@@ -1,5 +1,5 @@
                                                                 <%- include("partials/cdns.ejs") %>	
-<title>24news7</title>
+<title>World-NEWS</title>
                                                                 <%- include("partials/nav.ejs") %>
 <div class="container">
     <!-- SLIDE SHOW -->
@@ -12,23 +12,69 @@
                     <% if(articles) articles.forEach(function(article){ %>
                             <% if(i==0){ %>
                                 <div class="carousel-item active">
-                                    <div class="card m-auto" id="slide-card">
-                                        <img src="<%= article.urlToImage %>" class="card-img-top" alt="NO IMAGE TO DISPLAY" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTX8MzZOVmqSTyMwJ6mDjKhdLdqQbgNrKXEAZxXO69yuT4u5QFN';">
+                                    <div class="card m-auto">
+                                        <img src="<%= article.urlToImage %>" class="card-img-top slide-img" alt="NO IMAGE TO DISPLAY" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTX8MzZOVmqSTyMwJ6mDjKhdLdqQbgNrKXEAZxXO69yuT4u5QFN';">
                                         <div class="card-body">
                                             <h5 class="card-title font-weight-bold underline"><%= article.title %></h5>
                                             <p class="card-text"><%= article.description %></p>
-                                            <a class="btn btn-primary btn-sm" href="<%= article.url %>" target="_blank" role="button">Learn more</a>
+                                            <!-- MODAL STARTS HERE -->
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenter<%= i %>">
+                                                Learn More
+                                            </button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="ModalCenter<%= i %>" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle<%= i %>" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header bg-warning">
+                                                            <h5 class="modal-title font-weight-bold underline" id="ModalCenterTitle<%= i %>"><%= article.title %></h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img src="<%= article.urlToImage %>" class="w-100" alt="NO IMAGE TO DISPLAY" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTX8MzZOVmqSTyMwJ6mDjKhdLdqQbgNrKXEAZxXO69yuT4u5QFN';"> 
+                                                            <p>Source:<%= article.source.name %>, <%= article.publishedAt.substring(0,10) %></p>
+                                                            <p><%= article.content %></p>
+                                                            <a  href="<%= article.url %>" target="_blank" role="button">Full News here</a>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             <% }else{ %>
                                 <div class="carousel-item">
-                                    <div class="card m-auto" id="slide-card">
-                                        <img src="<%= article.urlToImage %>" class="card-img-top" alt="NO IMAGE TO DISPLAY" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTX8MzZOVmqSTyMwJ6mDjKhdLdqQbgNrKXEAZxXO69yuT4u5QFN';">
+                                    <div class="card m-auto">
+                                        <img src="<%= article.urlToImage %>" class="card-img-top slide-img" alt="NO IMAGE TO DISPLAY" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTX8MzZOVmqSTyMwJ6mDjKhdLdqQbgNrKXEAZxXO69yuT4u5QFN';">
                                         <div class="card-body">
                                             <h5 class="card-title font-weight-bold underline"><%= article.title %></h5>
                                             <p class="card-text"><%= article.description %></p>
-                                            <a class="btn btn-primary btn-sm" href="<%= article.url %>" target="_blank" role="button">Learn more</a>
+                                            <!-- MODAL STARTS HERE -->
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenter<%= i %>">
+                                                Learn More
+                                            </button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="ModalCenter<%= i %>" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle<%= i %>" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header bg-warning">
+                                                            <h5 class="modal-title font-weight-bold underline" id="ModalCenterTitle<%= i %>"><%= article.title %></h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img src="<%= article.urlToImage %>" class="w-100" alt="NO IMAGE TO DISPLAY" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTX8MzZOVmqSTyMwJ6mDjKhdLdqQbgNrKXEAZxXO69yuT4u5QFN';"> 
+                                                            <p>Source:<%= article.source.name %>, <%= article.publishedAt.substring(0,10) %></p>
+                                                            <p><%= article.content %></p>
+                                                            <a  href="<%= article.url %>" target="_blank" role="button">Full News here</a>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -48,11 +94,13 @@
             </div>
         </div>
     </div>
+    <h2>Custom Search :</h1>
+        <p class="p-1 rounded bg-info">Click --"submit"-- button to submit your responses</p>
     <form action="/search" method="GET">
     <!--------------------------------------- SORT OPTIONS--------------------------->
     <div id="navbar1" class="sort-box mb-0">
         <div class="row d-flex justify-content-around align-items-center">
-            <p class="dropdown-item w-auto m-0 mt-1 font-weight-bold">Sort By :</p>
+            <p class="w-auto m-0 mt-1 font-weight-bold">Sort By :</p>
             <a class="dropdown-item w-auto rounded active m-0 mt-1" href="#keyword">Keyword</a>
             <a class="dropdown-item w-auto rounded m-0 mt-1" href="#sources">Source</a>
             <a class="dropdown-item w-auto rounded m-0 mt-1" href="#countries">Country</a>

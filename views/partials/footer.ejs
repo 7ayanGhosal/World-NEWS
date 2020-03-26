@@ -4,6 +4,14 @@
 			<p class="copyright">World-NEWS © 2020</p>
 		</div>
 	</div>
-	<!-- BOOTSTRAP JQUERY, JS -->
+	<script>
+		// in the search page add a function to respond to the clicking of cross button
+		var lis = document.getElementsByClassName("cross");
+		for(var i=0; i<lis.length; i++){
+			lis[i].addEventListener("click", function(){
+				this.parentElement.classList.add("d-none");
+			})
+		}
+	</script>
 </body>
 </html>
